@@ -36,12 +36,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?php 
                     $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
-
                      <?=  $form->field($model, 'imageFiles[]')->widget(FileInput::classname(), [
                         'options' => ['multiple' => true, 'accept' => 'image/*', 'maxFileSize'=> 10280,],
+                        'pluginOptions' => ['previewFileType' => 'image']
                     ]); ?>
-                    <?php //= $form->field($model, 'imageFiles[]')->fileInput(['multiple' => true, 'accept' => 'image/*']) ?>
-
                 <?php ActiveForm::end() ?>
             </div>
         </div>
