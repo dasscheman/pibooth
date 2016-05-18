@@ -12,7 +12,7 @@ $this->title = 'Upload';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="site-uplaod">
+<div class="site-upload">
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php if (Yii::$app->session->hasFlash('uploadFormSubmitted')): ?>

@@ -114,19 +114,16 @@ class SiteController extends Controller
     
     public function actionViewimages()
     {
-        $model = new UploadForm();
-
-        if (Yii::$app->request->isPost) {
-            $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
-            if ($model->upload()) {
-                // file is uploaded successfully            
-                Yii::$app->session->setFlash('uploadFormSubmitted');
-
-                return $this->refresh();
-                return $this->render('index');
+        $files=\yii\helpers\FileHelper::findFiles('uploads/', ['only'=>['*.png','*.jpg']]);
+        $model = array();
+        if (isset($files[0])) {
+            foreach ($files as $index => $file) {
+                $model[] = ['img' => $file,];
             }
+        } else {
+            echo "There are no files available for download.";
         }
-
-        return $this->render('upload', ['model' => $model]);
+      
+        return $this->render('viewimages', ['model' => $model]);
     }
 }
