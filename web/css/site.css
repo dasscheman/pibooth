@@ -8,6 +8,9 @@ body {
     height: auto;
     margin: 0 auto -60px;
     padding: 0 0 60px;
+    background-image: url('../images/oerol.jpg');
+    background-repeat:no-repeat;/*we want to have one single image not a repeated one*/  
+    background-size: initial;
 }
 
 .wrap > .container {
@@ -89,3 +92,30 @@ a.desc:after {
     padding: 10px 20px;
     margin: 0 0 15px 0;
 }
+
+  .navbar-inverse {
+      background-color: #9EB7CB;
+     /* border-color: #080808; */
+     border: none;
+  }
+
+  .navbar-inverse 
+  .navbar-brand {
+      color: #080808;
+  }
+  
+  .navbar-inverse .navbar-nav > li > a {
+      color: #080808;
+  }
+  
+  .form-control {
+      height: 61px;
+  }
+  
+  label.control-label {
+    display: none;
+  }
+  
+  .has-error .help-block {
+    font-size: 33px;
+  }

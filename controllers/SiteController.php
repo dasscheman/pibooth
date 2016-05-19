@@ -123,7 +123,15 @@ class SiteController extends Controller
         } else {
             echo "There are no files available for download.";
         }
-      
-        return $this->render('viewimages', ['model' => $model]);
+        
+        // Hier geven we de autoplay tijd mee.
+        // Ik doe dat hier omdat de page refresh time gekoppeld is aan de 
+        // autoplay time. Op deze manier wordt er pas een refresh gedaan als 
+        // alle foto's getoont zijn. Nieuwe foto's worden dan dus pas getoont 
+        // als het rondje afgemaakt is.
+        $time['autoplay'] = 2000;
+        $time['refresh'] = $time['autoplay'] * count($files);
+        
+        return $this->render('viewimages', ['model' => $model, 'time' => $time]);
     }
 }

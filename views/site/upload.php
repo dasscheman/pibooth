@@ -9,39 +9,44 @@ use yii\bootstrap\ActiveForm;
 use kartik\file\FileInput;
 
 $this->title = 'Upload';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="site-upload">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="jumbotron">
+        <h1><?= Html::encode($this->title) ?></h1>
+        <?php
+        if (Yii::$app->session->hasFlash('uploadFormSubmitted')) { ?>
 
-    <?php if (Yii::$app->session->hasFlash('uploadFormSubmitted')): ?>
+          <div class="alert alert-success">
+              Dank voor het uploaden van je foto's.
+          </div>
 
-        <div class="alert alert-success">
-            Dank voor het uploaden van je foto's.
-        </div>
+          <p>
+              Je kunt de foto's <?= Html::a('hier', ['site/viewimages'], ['class' => 'profile-link']) ?> bekijken.
+              Of je kunt <?= Html::a('hier', ['site/upload'], ['class' => 'profile-link']) ?> nog meer foto's toevoegen.
+          </p>
 
-        <p>
-            Je kunt de foto's <?= Html::a('hier', ['site/viewimages'], ['class' => 'profile-link']) ?> bekijken.
-            Of je kunt <?= Html::a('hier', ['site/upload'], ['class' => 'profile-link']) ?> nog meer foto's toevoegen.
-        </p>
+        <?php } else { ?>
+          <p>
+            Je kunt 1 of meerdere foto's selecteren. 
+            Hoe je meerdere foto's kunt selecteren verschilt een beetje per telefoon.
+          </p>
+          <?php
+          $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);
+          echo $form->field($model, 'imageFiles[]')->widget(FileInput::classname(), [
+              'options' => ['multiple' => true, 'accept' => 'image/*', 'maxFileSize'=> 10280,],
+              'pluginOptions' => [
+                  'previewFileType' => 'image',
+                  'showCaption' => false,
+                  'showRemove' => true,
+                  'showUpload' => true,
+                  'browseClass' => 'btn btn-primary btn-block',
+                  'browseIcon' => '<i class="glyphicon glyphicon-camera"></i> ',
+                  'browseLabel' =>  'Select Photo'
+              ]
+          ]);
+          ActiveForm::end();
+        } ?>
 
-    <?php else: ?>
-        <p>
-            Hier kun je 1 of meerdere foto's tegelijk uploaden.
-        </p>
-
-        <div class="row">
-            <div class="col-lg-5">
-
-                <?php 
-                    $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
-                     <?=  $form->field($model, 'imageFiles[]')->widget(FileInput::classname(), [
-                        'options' => ['multiple' => true, 'accept' => 'image/*', 'maxFileSize'=> 10280,],
-                        'pluginOptions' => ['previewFileType' => 'image']
-                    ]); ?>
-                <?php ActiveForm::end() ?>
-            </div>
-        </div>
-    <?php endif; ?>
+    </div> 
 </div> 
