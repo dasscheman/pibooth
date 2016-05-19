@@ -119,3 +119,17 @@ a.desc:after {
   .has-error .help-block {
     font-size: 33px;
   }
+  
+  div.transbox {
+    background-color: #ffffff;
+    opacity: 0.75;
+    filter: alpha(opacity=75); /* For IE8 and earlier */
+    color: #080808;
+}
+  
+  div.transbox 
+  div.transbox-text{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+  
