@@ -24,7 +24,7 @@ class UploadForm extends Model
     {
         if ($this->validate()) { 
             foreach ($this->imageFiles as $file) {
-                $file->saveAs('uploads/' . $file->baseName . '.' . $file->extension);
+                $file->saveAs('uploads/' . $file->baseName . '-' . time() .  '.' . $file->extension);
             }
             return true;
         } else {

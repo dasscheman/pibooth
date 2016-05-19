@@ -34,7 +34,7 @@ $this->title = 'Feest Josje & Daan';
                           <br>
                           <h4>Let op!</h4> 
                           Zolang je met het netwerk "Pi3-photobooth" verbonden bent, heb je geen contact met het internet.
-                          Heel handig, daardoor gebruik niets van je data limieten bij het uploaden van foto's, maar je kunt ook niet internetten of whatsappen.
+                          Heel handig, daardoor gebruik je niets van je data limieten bij het uploaden van foto's, maar je kunt ook niet internetten of whatsappen.
                       </p>
                   </div>
                 </div>
