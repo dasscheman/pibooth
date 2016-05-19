@@ -29,7 +29,7 @@ $this->title = 'Feest Josje & Daan';
                       <p>   
                           <ul>Log in op het wifi netwerk "Pi3-photobooth"</ul>
                           <ul>Het wachtwoord is "raspberry"</ul>
-                          <ul>Ga met je browser naar <b><i>foto.feest</i></b> (zonder www)</ul>
+                          <ul>Ga met je browser naar <b><i>http://foto.feest</i></b> (zonder www)</ul>
                           <ul>Op deze site kun je je foto's uploaden</ul>
                           <br>
                           <h4>Let op!</h4> 
