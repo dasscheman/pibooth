@@ -8,9 +8,9 @@ body {
     height: auto;
     margin: 0 auto -60px;
     padding: 0 0 60px;
-    background-image: url('../images/oerol.jpg');
+    background-image: url('../images/ll.jpg');
     background-repeat:no-repeat;/*we want to have one single image not a repeated one*/  
-    background-size: initial;
+    background-size: cover;
 }
 
 .wrap > .container {
