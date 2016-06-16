@@ -26,10 +26,13 @@ class UploadForm extends Model
     public function upload()
     {
         if ($this->validate()) { 
-            foreach ($this->imageFiles as $file) {              
-                $file->saveAs('uploads/' . $file->baseName . '-' . time() .  '.' . $file->extension);
-                                                            
-                $exif = @exif_read_data('uploads/' . $file->baseName . '-' . time() .  '.' . $file->extension);
+            foreach ($this->imageFiles as $file) {     
+                $filename = 'uploads/' . time() .  '.' . $file->extension;
+                if (file_exists ($filename)) {
+                    $filename = 'uploads/' . time() . '-' . mt_rand(1000, 9999) . '.' . $file->extension;
+                }
+                $file->saveAs($filename);
+                $exif = @exif_read_data();
                 $rotation = 0;        
                 if (isset($exif['Orientation'])) {
                     $ort = $exif['Orientation'];

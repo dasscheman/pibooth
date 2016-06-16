@@ -25,7 +25,7 @@ class SiteController extends Controller
                 'ruleConfig' => [
                     'class' => AccessRule::className(),
                 ],
-                'only' => ['index', 'upload', 'viewimages'],
+                'only' => ['index', 'upload', 'viewimages', 'viewphotobooth'],
                 'rules' => [
                     [
                         'actions' => ['upload', 'viewimages' ],
@@ -40,6 +40,11 @@ class SiteController extends Controller
                         'actions' => ['index', 'logout'],
                         'allow' => true,
                         'roles' => ['@'],
+                    ],
+                    [
+                        'actions' => ['viewphotobooth'],
+                        'allow' => true,
+                        'roles' => ['?'],
                     ],
                 ],
             ],
@@ -193,5 +198,66 @@ class SiteController extends Controller
         $time['refresh'] = $time['autoplay'] * count($files);
         
         return $this->render('viewimages', ['model' => $model, 'time' => $time]);
+    }
+    
+    public function actionViewphotobooth()
+    {
+        $files = array();
+        
+        $files=\yii\helpers\FileHelper::findFiles('photobooth/', ['only'=>['*.gif']]);
+        $model = array();
+        if (isset($files[0])) {
+//            foreach ($files as $index => $file) {
+//              	// returns array if image file is readable      
+//                $exif = @exif_read_data($file, 0, true);
+//                $timestamp = null;
+//                if($exif) {
+//                    // prioritize the available datetimes
+//                    if(isset($exif['EXIF']['DateTimeOriginal'])) {
+//                      $timestamp = $exif['EXIF']['DateTimeOriginal'];
+//                      //$timestamp = str_replace(array(':', ' '), '', $exif['EXIF']['DateTimeOriginal']);
+//                    }
+//                    elseif(isset($exif['EXIF']['DateTimeDigitized'])) {
+//                      $timestamp = $exif['EXIF']['DateTimeDigitized'];
+//                      //$timestamp = str_replace(array(':', ' '), '', $exif['EXIF']['DateTimeDigitized']);
+//                    }
+//                    elseif(isset($exif['IFD0']['DateTime'])) {
+//                      $timestamp = $exif['IFD0']['DateTime'];
+//                      //$timestamp = str_replace(array(':', ' '), '', $exif['IFD0']['DateTime']);
+//                    }
+//                    elseif(isset($exif['FILE']['FileDateTime'])) {
+//                      $timestamp = $exif['FILE']['FileDateTime'];
+//                      //$timestamp = date('YmdHis', $exif['FILE']['FileDateTime']);
+//                    }
+//
+//                    // bad timestamp
+//                    if($timestamp == '00000000000000') {
+//                        $timestamp = date('YmdHis', filemtime($file));
+//                    }
+//                }
+//                $tempFiles[basename($file)] = $timestamp;
+//            }
+        } else {
+            echo "There are no files available for download.";
+        }
+        //var_dump($tempFiles); exit;
+        asort($tempFiles);
+        
+        //foreach ($tempFiles as $key => $value) {
+//            $model[] = ['img' => 'uploads/small/' . $key, 'caption' => $value];
+//        }
+        foreach ($files as $index => $file) {
+            $model[] = ['img' => 'uploads/small/' . $file, 'caption' => $index];
+        }
+
+        // Hier geven we de autoplay tijd mee.
+        // Ik doe dat hier omdat de page refresh time gekoppeld is aan de 
+        // autoplay time. Op deze manier wordt er pas een refresh gedaan als 
+        // alle foto's getoont zijn. Nieuwe foto's worden dan dus pas getoont 
+        // als het rondje afgemaakt is.
+        $time['autoplay'] = 2000;
+        $time['refresh'] = $time['autoplay'] * count($files);
+        
+        return $this->render('viewimage', ['model' => $model, 'time' => $time]);
     }
 }

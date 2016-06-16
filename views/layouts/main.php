@@ -38,6 +38,7 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'Upload', 'url' => ['/site/upload']],
+            ['label' => 'Photobooth', 'url' => ['/site/viewphotobooth']],
             ['label' => 'Foto overzicht', 'url' => ['/site/viewimages']],
             Yii::$app->user->isGuest ?
                 ['label' => 'Login', 'url' => ['/site/login']] :
