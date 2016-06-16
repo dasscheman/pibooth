@@ -4,29 +4,36 @@ namespace app\models;
 
 class User extends \yii\base\Object implements \yii\web\IdentityInterface
 {
+    const ROLE_ADMIN = 10;
+    const ROLE_MODERATOR = 20;
+    const ROLE_USER = 30;
+  
     public $id;
     public $username;
     public $password;
     public $authKey;
-    public $accessToken;
+    public $accessToken;    
+    public $role;
 
     private static $users = [
         '100' => [
             'id' => '100',
             'username' => 'admin',
-            'password' => 'admin',
+            'password' => 'infadels',
             'authKey' => 'test100key',
             'accessToken' => '100-token',
+            'role' => 10,
         ],
         '101' => [
             'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
+            'username' => 'feestganger',
+            'password' => 'zitaswoon',
             'authKey' => 'test101key',
             'accessToken' => '101-token',
+            'role' => 30,
         ],
-    ];
-
+    ]; 
+    
 
     /**
      * @inheritdoc

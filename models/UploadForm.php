@@ -5,6 +5,9 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\web\UploadedFile;
+use yii\imagine\Image; 
+use Imagine\Image\Box;
+
 
 class UploadForm extends Model
 {
@@ -23,12 +26,69 @@ class UploadForm extends Model
     public function upload()
     {
         if ($this->validate()) { 
-            foreach ($this->imageFiles as $file) {
+            foreach ($this->imageFiles as $file) {              
                 $file->saveAs('uploads/' . $file->baseName . '-' . time() .  '.' . $file->extension);
+                                                            
+                $exif = @exif_read_data('uploads/' . $file->baseName . '-' . time() .  '.' . $file->extension);
+                $rotation = 0;        
+                if (isset($exif['Orientation'])) {
+                    $ort = $exif['Orientation'];
+                }
+                switch($ort)
+                {
+                    case 3: // 180 rotate left
+                        $rotation = 180;
+                        break;
+                    case 6: // 90 rotate right
+                        $rotation = 90;
+                        break;
+                    case 8:    // 90 rotate left
+                        $rotation =  -90;
+                        break;
+                }
+                $temp = Image::getImagine();//('uploads/' . $file->baseName . '-' . time() .  '.' . $file->extension);
+                $temp->open('uploads/' . $file->baseName . '-' . time() .  '.' . $file->extension)
+                    ->rotate($rotation)
+                    ->save('uploads/small/' . $file->baseName . '-' . time() .  '.' . $file->extension, ['quality' => 30]);
             }
             return true;
         } else {
             return false;
+        }
+    }
+    
+    public function resize()
+    {
+        foreach ($this->imageFiles as $file) {                              
+            $temp = Image::getImagine();//('uploads/' . $file->baseName . '-' . time() .  '.' . $file->extension);
+            $temp->open('uploads/' . $file->baseName . '-' . time() .  '.' . $file->extension)
+                ->save('uploads/small/' . $file->baseName . '-' . time() .  '.' . $file->extension, ['quality' => 10]);
+        }
+    }
+        
+    public function rotate()
+    {
+        foreach ($this->imageFiles as $file) {                              
+            $exif = @exif_read_data('uploads/small/' . $file->baseName . '-' . time() .  '.' . $file->extension);
+            $rotation = 0;                
+            $ort = $exif['Orientation'];
+            switch($ort)
+            {
+                case 3: // 180 rotate left
+                    $rotation = 180;
+                    break;
+                case 6: // 90 rotate right
+                    $rotation = 90;
+                    break;
+                case 8:    // 90 rotate left
+                    $rotation =  -90;
+                    break;
+            }
+//           
+            $temp = Image::getImagine();//('uploads/' . $file->baseName . '-' . time() .  '.' . $file->extension);
+            $temp->open('uploads/small/' . $file->baseName . '-' . time() .  '.' . $file->extension)
+                ->rotate($rotation)
+                ->save('uploads/small/' . $file->baseName . '-' . time() .  '.' . $file->extension); //, ['quality' => 10]);
         }
     }
 }

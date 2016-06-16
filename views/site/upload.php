@@ -28,8 +28,7 @@ $this->title = 'Upload';
 
         <?php } else { ?>
           <p>
-            Je kunt 1 of meerdere foto's selecteren. 
-            Hoe je meerdere foto's kunt selecteren verschilt een beetje per telefoon.
+            Je kunt 1 of meerdere foto's selecteren (max 8M per foto, 10 foto's per keer). 
           </p>
           <?php
           $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);

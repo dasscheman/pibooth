@@ -7,15 +7,15 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use kartik\file\FileInput;
 use yii\widgets\Pjax;
-
-$refresh  = $time['refresh'];
-
-$script = <<< JS
-$(document).ready(function() {
-	setInterval(function(){ $("#beschikbaar").click(); }, $refresh);
-});
-JS;
-$this->registerJs($script);
+//
+//$refresh  = $time['refresh'];
+//
+//$script = <<< JS
+//$(document).ready(function() {
+//	setInterval(function(){ $("#beschikbaar").click(); }, $refresh);
+//});
+//JS;
+//$this->registerJs($script);
 
 $this->title = 'Foto overzicht';
 ?>
@@ -28,7 +28,7 @@ $this->title = 'Foto overzicht';
               'nav' => 'thumbs',
               'startindex' => 0,
               'autoplay' => $time['autoplay'],
-              'shuffle' => true,
+              //'shuffle' => true,
               'allowfullscreen' => true,
               'width' => '100%',
               'maxwidth' => '100%',
@@ -37,7 +37,7 @@ $this->title = 'Foto overzicht';
               'spinner' => [
                   'lines' => 20,
               ],
-              'loop' => true,
+              'loop' => false,
               'hash' => true,
           ]);
 
@@ -47,10 +47,7 @@ $this->title = 'Foto overzicht';
             ['class' => 'btn btn-lg btn-primary', 'id' => 'beschikbaar']); 
 
           echo \metalguardian\fotorama\Fotorama::widget([
-              'items' => $model,
-              'options' => [
-                  'nav' => 'thumbs',
-              ]
+              'items' => $model,            
           ]); 
           Pjax::end(); ?>
 

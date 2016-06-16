@@ -39,6 +39,11 @@ AppAsset::register($this);
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'Upload', 'url' => ['/site/upload']],
             ['label' => 'Foto overzicht', 'url' => ['/site/viewimages']],
+            Yii::$app->user->isGuest ?
+                ['label' => 'Login', 'url' => ['/site/login']] :
+                ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+                    'url' => ['/site/logout'],
+                    'linkOptions' => ['data-method' => 'post']],
         ],
     ]);
     NavBar::end();
