@@ -44,7 +44,7 @@ class SiteController extends Controller
                     [
                         'actions' => ['viewphotobooth'],
                         'allow' => true,
-                        'roles' => ['?'],
+                        'roles' => ['?', '@'],
                     ],
                 ],
             ],
