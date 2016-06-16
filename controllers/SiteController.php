@@ -241,7 +241,7 @@ class SiteController extends Controller
             echo "There are no files available for download.";
         }
         //var_dump($tempFiles); exit;
-        asort($tempFiles);
+        //asort($tempFiles);
         
         //foreach ($tempFiles as $key => $value) {
 //            $model[] = ['img' => 'uploads/small/' . $key, 'caption' => $value];
