@@ -247,7 +247,7 @@ class SiteController extends Controller
 //            $model[] = ['img' => 'uploads/small/' . $key, 'caption' => $value];
 //        }
         foreach ($files as $index => $file) {
-            $model[] = ['img' => 'photobooth/' . $file, 'caption' => $index];
+            $model[] = ['img' => $file, 'caption' => $index];
         }
 
         // Hier geven we de autoplay tijd mee.
