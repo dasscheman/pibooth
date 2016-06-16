@@ -258,6 +258,6 @@ class SiteController extends Controller
         $time['autoplay'] = 2000;
         $time['refresh'] = $time['autoplay'] * count($files);
         
-        return $this->render('viewimage', ['model' => $model, 'time' => $time]);
+        return $this->render('viewimages', ['model' => $model, 'time' => $time]);
     }
 }
